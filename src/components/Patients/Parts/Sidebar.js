@@ -1,21 +1,37 @@
 import React from 'react';
 
-const Sidebar = () => {
+import {Link} from 'react-router-dom'
+
+const Sidebar = (props) => {
   return <nav class="sidebar sidebar-offcanvas" id="sidebar">
   <ul class="nav">
-    {/* <li class="nav-item">
-      <a class="nav-link" href="/dashboard">
+    <li class="nav-item">
+      <Link class="nav-link" to={"/"+props.user.username}>
         <i class="icon-grid menu-icon"></i>
         <span class="menu-title">Dashboard</span>
-      </a>
-    </li> */}
+      </Link>
+    </li>
 
     
     <li class="nav-item">
-      <a class="nav-link" href="/calander">
+      <Link class="nav-link" to="/account">
         <i class="icon-grid menu-icon"></i>
         <span class="menu-title">Profile</span>
-      </a>
+      </Link>
+    </li>
+
+    <li class="nav-item">
+      <Link class="nav-link" to="/appoiment">
+        <i class="icon-grid menu-icon"></i>
+        <span class="menu-title">My Appoiment</span>
+      </Link>
+    </li>
+
+    <li class="nav-item">
+      <Link class="nav-link" to="/my-doctors/">
+        <i class="icon-grid menu-icon"></i>
+        <span class="menu-title">Doctors</span>
+      </Link>
     </li>
     
 

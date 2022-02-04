@@ -1,6 +1,17 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import logo from "../../../images/logo.png";
-const Nav = () => {
+import {Link} from 'react-router-dom';
+const Nav = (props) => {
+
+  const [patient, setPatient] = useState(false);
+
+  useEffect(() => {
+
+  if (localStorage.getItem("v1_user_data")){
+    setPatient(JSON.parse(localStorage.getItem("v1_user_data")))
+  }
+
+}, []);
 
 
   function logout_function(){
@@ -14,26 +25,31 @@ const Nav = () => {
   return <>
   <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
   <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-    <a class="navbar-brand brand-logo mr-5" href="../../index.html">
+    <Link class="navbar-brand brand-logo mr-5" to="/">
       <img
         src={logo}
         class="mr-2"
         alt="logo"
         style={{ width: "200px", height: "1%" }}
       />
-    </a>
+    </Link>
     <a class="navbar-brand brand-logo-mini" href="../../index.html">
       <img src="../../images/logo-mini.svg" alt="logo" />
     </a>
   </div>
   <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+
     <button
       class="navbar-toggler navbar-toggler align-self-center"
       type="button"
       data-toggle="minimize"
     >
+
       <span class="icon-menu"></span>
+      
     </button>
+
+  {/*Serach Tag */}
     <ul class="navbar-nav mr-lg-2">
       <li class="nav-item nav-search d-none d-lg-block">
         <div class="input-group">
@@ -56,8 +72,12 @@ const Nav = () => {
         </div>
       </li>
     </ul>
+
     <ul class="navbar-nav navbar-nav-right">
-      <li class="nav-item dropdown">
+
+      
+      {patient !== false ?<>
+        <li class="nav-item dropdown">
         <a
           class="nav-link count-indicator dropdown-toggle"
           id="notificationDropdown"
@@ -120,8 +140,9 @@ const Nav = () => {
             </div>
           </a>
         </div>
-      </li>
-      <li class="nav-item nav-profile dropdown">
+        </li>
+
+        <li class="nav-item nav-profile dropdown">
         <a
           class="nav-link dropdown-toggle"
           href="#"
@@ -137,16 +158,22 @@ const Nav = () => {
           class="dropdown-menu dropdown-menu-right navbar-dropdown"
           aria-labelledby="profileDropdown"
         >
-          <a class="dropdown-item">
+          <Link class="dropdown-item" to='/account'>
             <i class="ti-settings text-primary"></i>
             Account
-          </a>
+          </Link>
           <a class="dropdown-item" onClick={logout_function}>
             <i class="ti-power-off text-primary"></i>
             Logout
           </a>
         </div>
       </li>
+
+
+
+      </>:''}
+      
+      
       <li class="nav-item nav-settings d-none d-lg-flex">
         <a class="nav-link" href="#">
           <i class="icon-ellipsis"></i>

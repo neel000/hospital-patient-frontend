@@ -4,12 +4,31 @@ import LoadingOverlay from "react-loading-overlay";
 import Nav from '../Parts/Nav';
 import Sidebar from '../Parts/Sidebar';
 import Footer from '../Parts/Footer';
-
 import AxiosFunction from '../AxiosFunction';
+import { useParams } from 'react-router-dom';
 
-const PatientHome = (props) => {
 
-  const [loader, setLoader] = useState(false)
+const DoctorDetails = (props) => {
+  
+    let {id} = useParams();
+    const [loader, setLoader] = useState(false)
+
+    useEffect(() => {
+      let mounted = true;
+      if (mounted) {
+    
+    
+        AxiosFunction('get',`v1/api/doctors/${id}/`,{}, false).then(resp=>{
+          //setDocter(resp.bknd_data.data)
+          console.log("Axios Data Doctor Id-->>", resp.bknd_data)
+          //setArregement(resp.bknd_data.arregement)
+          setLoader(false)
+        })
+          
+      }
+      return () => mounted = false;
+      }, [])
+
 
 
   return <>
@@ -23,7 +42,7 @@ const PatientHome = (props) => {
 
         <div className="main-panel">
           <div className="content-wrapper">
-          <h1>DASHBOARD </h1>
+          <h1>DOCTOR {id}</h1>
             {props.user.username}
 
             <div class="row">
@@ -183,4 +202,4 @@ const PatientHome = (props) => {
   </>;
 };
 
-export default PatientHome;
+export default DoctorDetails;

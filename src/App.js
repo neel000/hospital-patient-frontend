@@ -27,6 +27,11 @@ import OTP from "./components/Signup/OTP";
 import Commision from "./components/Commision/Commision";
 import LoginPage from "./components/Patients/Auth/LoginPage";
 import PatientHome from "./components/Patients/Dashboard/PatientHome";
+import PatientProfile from "./components/Patients/Dashboard/PatientProfile";
+import Appoiment from "./components/Patients/Dashboard/Appoiment";
+import Doctors from "./components/Patients/Dashboard/Doctors";
+import DoctorDetails from "./components/Patients/Dashboard/DoctorDetails";
+import HomePage from "./components/Patients/Auth/HomePage";
 
 const Main = () => {
   const [user, setuser] = useState(null);
@@ -40,7 +45,7 @@ const Main = () => {
     }
 
     if (localStorage.getItem("v1_user_data")){
-      setPatient(true)
+      setPatient(JSON.parse(localStorage.getItem("v1_user_data")))
     }
 
 
@@ -55,29 +60,36 @@ const Main = () => {
             
             <Route exact path="/signup" element={<Signup />} />
             <Route exact path="/SignIn" element={<SignIn />} />{" "}
-            <Route exact path="/" element={<SignIn />} />{" "}
             <Route exact path="/otp" element={<OTP />} />{" "}
             {/* <Route path="*" element={<SignIn />} /> */}
           </>
         )}
 
-        {patient == true ? (
+        {patient !== false ? (
+          
+
+
           <>
-          <Route exact path="/login" element={<PatientHome/>} />
-          <Route exact path="/account" element={<PatientHome/>} />
+          <Route exact path="/login" element={<PatientHome user={patient.user}/>} />
+          <Route exact path="/account" element={<PatientProfile user={patient.user}/>} />
+          <Route exact path="/:userId" element={<PatientHome user={patient.user}/>} />
+          <Route exact path="/appoiment" element={<Appoiment user={patient.user}/>} />
+          
+
+          <Route exact path="/doctors/:id" element={<DoctorDetails user={patient.user}/>} />
           </>
+
         ):
         (<>
           <Route exact path="/login" element={<LoginPage/>} />
         </>)}
 
+        
+
         {user && (
+
           <>
             <Route exact path="/otp" element={<OTP />} />
-            
-
-            <Route exact path="/" element={<MainPage />} />
-            
             <Route exact path="/main-profile" element={<MainPage />} />
             <Route exact path="/doctors" element={<DoctorList />} />
             <Route exact path="/doctorProfile" element={<DoctorProfile />} />
@@ -93,8 +105,11 @@ const Main = () => {
             <Route exact path="/user-home" element={<UserHome />} />
             <Route exact path="/commision" element={<Commision />} />
           </>
+
         )}
-        {/* <Route path="*" element={<SignIn />} /> */}
+
+        <Route exact path="/my-doctors/" element={<Doctors/>} />
+        <Route path="/" element={<HomePage/>}/> 
       </Routes>
     </>
   );
