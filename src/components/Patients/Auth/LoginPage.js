@@ -28,7 +28,7 @@ const LoginPage = () => {
       if (resp.data.status === 200){
         localStorage.setItem('v1_user_data', JSON.stringify(resp.data.data))
         setLoader(false)
-        window.location.href = ('/account')
+        window.location.href = ('/')
       }
       else{
         toast.error(`${resp.data.status}- ${resp.data.msg}`)

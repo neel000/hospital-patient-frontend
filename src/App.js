@@ -74,8 +74,6 @@ const Main = () => {
           <Route exact path="/account" element={<PatientProfile user={patient.user}/>} />
           <Route exact path="/:userId" element={<PatientHome user={patient.user}/>} />
           <Route exact path="/appoiment" element={<Appoiment user={patient.user}/>} />
-          
-
           <Route exact path="/doctors/:id" element={<DoctorDetails user={patient.user}/>} />
           </>
 

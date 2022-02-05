@@ -36,12 +36,13 @@ function filter_function(){
 
 useEffect(() => {
   let mounted = true;
+  
   if (mounted) {
 
 
-    AxiosFunction('get','v1/api/doctors/',{}, false).then(resp=>{
+    AxiosFunction('get',`v1/api/doctors/${window.location.search}`,{}, false).then(resp=>{
       setDocter(resp.bknd_data.data)
-      console.log("Axios Data-->>", resp.bknd_data)
+      //console.log("Axios Data-->>", resp.bknd_data)
       setArregement(resp.bknd_data.arregement)
       setLoader(false)
     })
@@ -164,7 +165,7 @@ return <>
                       
                     </div>
                     <div class="onin_tx">
-                      <h4>D.r {i.name? i.name:i.user}</h4>
+                      <h4>{i.name? i.name:i.user}</h4>
                       <span>{!i.specialties? 'Not Set':i.specialties}</span>
                       <span>noset years experience overall</span>
 
@@ -174,12 +175,10 @@ return <>
 
                       <div class="thu_mn">
                         <a href=""><i class="fa fa-thumbs-up"></i> 97%</a>
-                        <span><a href="">1015 Patient Stories</a></span>
+                        {/* <span><a href="">1015 Patient Stories</a></span> */}
                       </div>
-
-
-
                     </div>
+
                     <div class="onin_btn">
 
                       <p><i class="fa fa-calendar-o"></i> Available Today</p>
