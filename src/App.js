@@ -33,6 +33,7 @@ import Doctors from "./components/Patients/Dashboard/Doctors";
 import DoctorDetails from "./components/Patients/Dashboard/DoctorDetails";
 import HomePage from "./components/Patients/Auth/HomePage";
 
+
 const Main = () => {
   const [user, setuser] = useState(null);
   const [patient, setPatient] = useState(false);
@@ -67,19 +68,18 @@ const Main = () => {
 
         {patient !== false ? (
           
-
-
           <>
           <Route exact path="/login" element={<PatientHome user={patient.user}/>} />
           <Route exact path="/account" element={<PatientProfile user={patient.user}/>} />
           <Route exact path="/:userId" element={<PatientHome user={patient.user}/>} />
           <Route exact path="/appoiment" element={<Appoiment user={patient.user}/>} />
-          <Route exact path="/doctors/:id" element={<DoctorDetails user={patient.user}/>} />
+          
           </>
 
         ):
         (<>
           <Route exact path="/login" element={<LoginPage/>} />
+          
         </>)}
 
         
@@ -108,6 +108,7 @@ const Main = () => {
 
         <Route exact path="/my-doctors/" element={<Doctors/>} />
         <Route path="/" element={<HomePage/>}/> 
+        <Route exact path="/doctors/:id" element={<DoctorDetails user={patient}/>} />
       </Routes>
     </>
   );

@@ -5,9 +5,10 @@ import Nav from '../Parts/Nav';
 import Sidebar from '../Parts/Sidebar';
 import Footer from '../Parts/Footer';
 //import {Link} from 'react-router-dom'
-
 import AxiosFunction from '../AxiosFunction';
 import GoogleMapReact from 'google-map-react';
+
+
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
@@ -16,15 +17,19 @@ const PatientProfile = (props) => {
 const [loader, setLoader] = useState(true)
 const [userData, setuserData] = useState([])
 const [localData, setLocalData] = useState({
-ip: "",
-city: "",
-state: "",
-longitude: "",
-latitude: "",
-zip: "",
-country: "",
+    ip: "",
+    city: "",
+    state: "",
+    longitude: "",
+    latitude: "",
+    zip: "",
+    country: "",
 
 })
+
+    
+
+    
 
 const [username, setUsername] = useState('')
 const [showMap, setShowMap] = useState(false)
@@ -211,7 +216,7 @@ return <>
                           </>
                           :
                           <>
-                           <img src={'http://127.0.0.1:8000'+i.photo} alt="profile"
+                           <img src={'http://178.128.106.131:8000'+i.photo} alt="profile"
                             className="img-lg rounded-circle mb-3" />
                           </>
                             }

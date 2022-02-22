@@ -7,19 +7,22 @@ import axios from 'axios'
 
 async function AxiosFunction(method, path, obj_query, auth=true) {
     let token = JSON.parse(localStorage.getItem('v1_user_data'))
+
+    if (!token){
+        token = {token:''}
+    }
     let headers = { headers: {
         'Content-Type': 'multipart/form-data',
         "Authorization" : `Token ${token.token}`,
     }}
-    let url = `http://127.0.0.1:8000/${path}`
+    //let url = `https://brtechgeeks.pythonanywhere.com/${path}`
+    let url = `http://178.128.106.131:8000/${path}`
     let data = {response:false, bknd_data:null, msg:`${method} Method Is Invalid`}
 
-
+    
 
 
     if (auth){
-
-  
 
         if (method === 'get'){
 
@@ -49,7 +52,8 @@ async function AxiosFunction(method, path, obj_query, auth=true) {
             
             })
             .catch(err=>{
-                
+                console.log(err)
+
             })
 
         }
@@ -109,7 +113,7 @@ async function AxiosFunction(method, path, obj_query, auth=true) {
             })
             .catch(err=>{
                 data.msg = "Axios Call Failed "+ method + err
-                //alert("No Auth Failed....Resp")
+                alert("No Auth Failed....Resp")
             })
 
         }
